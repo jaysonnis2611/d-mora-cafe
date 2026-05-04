@@ -1,0 +1,76 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type MenuCategory__447177382 =
+  {#Bruschetta; #ColdCoffee; #GarlicBread; #Other; #Pasta; #Wraps};
+type MenuItem__25360883 =
+  {
+    available : Bool;
+    category : MenuCategory__447177382;
+    description : Text;
+    id : Nat;
+    name : Text;
+    price : Nat;
+    vegetarian : Bool
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OrderItem__970180480 =
+  {menuItemId : Nat; name : Text; price : Nat; qty : Nat};
+type OrderStatus__591380551 = {#Delivered; #Preparing; #Ready; #Received};
+type Order__720360493 =
+  {
+    createdAt : Timestamp__301639476;
+    customerName : Text;
+    deliveryAddress : ?Text;
+    email : Text;
+    id : Nat;
+    items : [OrderItem__970180480];
+    paymentMethod : PaymentMethod__731196174;
+    phone : Text;
+    serviceType : ServiceType__1018426466;
+    status : OrderStatus__591380551;
+    totalAmount : Nat
+  };
+type PaymentMethod__731196174 = {#Card; #UPI};
+type ReservationStatus__703841619 = {#Cancelled; #Confirmed; #Pending};
+type Reservation__791493290 =
+  {
+    date : Text;
+    guestName : Text;
+    id : Nat;
+    partySize : Nat;
+    phone : Text;
+    status : ReservationStatus__703841619;
+    time : Text;
+    zomatoLink : Text
+  };
+type ServiceType__1018426466 = {#Delivery; #DineIn; #Takeaway};
+type Timestamp__301639476 = Int;
+actor {
+  stable menuItems :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?MenuItem__25360883]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextMenuId : {var value : Nat};
+  stable nextOrderId : {var value : Nat};
+  stable nextResId : {var value : Nat};
+  stable orders :
+    {
+      var root : Node__46230540<Nat, Order__720360493>;
+      var size : Nat__490723111
+    };
+  stable reservations :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Reservation__791493290]];
+      var elementIndex : Nat__490723111
+    }
+};

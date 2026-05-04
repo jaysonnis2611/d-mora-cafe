@@ -1,0 +1,27 @@
+{
+  "overview": "D'Mora Cafe & Bistro is a stylish, cozy, and pet-friendly vegetarian cafe on College Road, Nashik. This website features a full digital menu, table reservations, online ordering with UPI payment, customer reviews, photo gallery, and smooth scroll animations — all in English.",
+  "features": [
+    "Hero section with animations and CTA buttons",
+    "Digital menu with search and categories",
+    "Table reservation system",
+    "Online ordering with shopping cart",
+    "UPI and card payment checkout",
+    "Customer reviews from Google, Zomato, Justdial",
+    "Photo gallery with lightbox",
+    "Location, contact, and footer"
+  ],
+  "category": "restaurant-food",
+  "tags": [
+    "cafe",
+    "restaurant",
+    "vegetarian",
+    "italian",
+    "nashik",
+    "menu",
+    "reservations",
+    "ordering",
+    "upi",
+    "pet-friendly"
+  ],
+  "last_updated": "2026-04-17T08:09:39.545Z"
+}

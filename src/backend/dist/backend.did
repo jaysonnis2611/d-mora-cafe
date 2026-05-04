@@ -1,0 +1,124 @@
+type Timestamp = int;
+type ServiceType = 
+ variant {
+   Delivery;
+   DineIn;
+   Takeaway;
+ };
+type ReservationStatus = 
+ variant {
+   Cancelled;
+   Confirmed;
+   Pending;
+ };
+type ReservationRequest = 
+ record {
+   date: text;
+   guestName: text;
+   partySize: nat;
+   phone: text;
+   time: text;
+ };
+type Reservation = 
+ record {
+   date: text;
+   guestName: text;
+   id: nat;
+   partySize: nat;
+   phone: text;
+   status: ReservationStatus;
+   time: text;
+   zomatoLink: text;
+ };
+type PaymentMethod = 
+ variant {
+   Card;
+   UPI;
+ };
+type OrderStatus = 
+ variant {
+   Delivered;
+   Preparing;
+   Ready;
+   Received;
+ };
+type OrderRequest = 
+ record {
+   customerName: text;
+   deliveryAddress: opt text;
+   email: text;
+   items: vec OrderItem;
+   paymentMethod: PaymentMethod;
+   phone: text;
+   serviceType: ServiceType;
+   totalAmount: nat;
+ };
+type OrderItem = 
+ record {
+   menuItemId: nat;
+   name: text;
+   price: nat;
+   qty: nat;
+ };
+type Order = 
+ record {
+   createdAt: Timestamp;
+   customerName: text;
+   deliveryAddress: opt text;
+   email: text;
+   id: nat;
+   items: vec OrderItem;
+   paymentMethod: PaymentMethod;
+   phone: text;
+   serviceType: ServiceType;
+   status: OrderStatus;
+   totalAmount: nat;
+ };
+type MenuItem = 
+ record {
+   available: bool;
+   category: MenuCategory;
+   description: text;
+   id: nat;
+   name: text;
+   price: nat;
+   vegetarian: bool;
+ };
+type MenuCategory = 
+ variant {
+   Bruschetta;
+   ColdCoffee;
+   GarlicBread;
+   Other;
+   Pasta;
+   Wraps;
+ };
+service : {
+  addMenuItem: (item:
+   record {
+     available: bool;
+     category: MenuCategory;
+     description: text;
+     name: text;
+     price: nat;
+     vegetarian: bool;
+   }) -> (MenuItem);
+  createOrder: (req: OrderRequest) -> (Order);
+  createReservation: (req: ReservationRequest) -> (Reservation);
+  deleteMenuItem: (id: nat) -> (bool);
+  getMenuItems: () -> (vec MenuItem) query;
+  getMenuItemsByCategory: (category: MenuCategory) -> (vec MenuItem) query;
+  getOrders: () -> (vec Order) query;
+  getReservations: () -> (vec Reservation) query;
+  updateMenuItem: (id: nat, item:
+   record {
+     available: bool;
+     category: MenuCategory;
+     description: text;
+     name: text;
+     price: nat;
+     vegetarian: bool;
+   }) -> (opt MenuItem);
+  updateOrderStatus: (id: nat, status: OrderStatus) -> (bool);
+  updateReservationStatus: (id: nat, status: ReservationStatus) -> (bool);
+}
